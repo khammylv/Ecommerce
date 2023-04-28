@@ -13,3 +13,14 @@ export const productsApi = async () =>{
     console.log(err.response.data)
   }
 }
+
+export const productUnico = async (id) =>{
+  try{
+    const product = await axios.get(`${baseUrl}/products/${id}`);
+    return product.data
+  }
+  catch(err){
+    console.log(err.response.data)
+  }
+ 
+}
