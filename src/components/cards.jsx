@@ -1,12 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-import {
-  mostrarProducts,
-  
-} from "../services/dataproducts";
+import { mostrarProducts } from "../services/dataproducts";
 import "../App.css";
-import { productsApi, productUnico} from "../api/productsApi";
+import { productsApi, productUnico } from "../api/productsApi";
 
 const CardProducts = ({
   allProducts,
@@ -22,27 +19,35 @@ const CardProducts = ({
     };
     getdata();
   }, []);
- 
-  //setAllProducts(JSON.parse(sessionStorage.getItem('product')));
+
   const onAddProduct = (id) => {
-    productUnico(id).then((res) => {
-      
-      const productQtf = { ...res, quantity: 1 };
-      if (allProducts.find((item) => item.id === id)) {
-        alert("este producto ya existe");
-      } else {
-        setCountProducts(countProducts + productQtf.quantity);
-        setAllProducts([...allProducts, productQtf]);
-       
-      }
-    })
-	.catch(err => console.log(err));
+    productUnico(id)
+      .then((res) => {
+        const productQtf = { ...res, quantity: 1 };
+        if (allProducts.find((item) => item.id === id)) {
+          alert("este producto ya existe");
+        } else {
+          setCountProducts(countProducts + productQtf.quantity);
+          setAllProducts([...allProducts, productQtf]);
+        }
+      })
+      .catch((err) => console.log(err));
     // const productQtf = { ...product, quantity: 1 };
     // if (allProducts.find((item) => item.id === product.id)) {
     //   alert("este producto ya existe");
     // } else {
     //   setCountProducts(countProducts + productQtf.quantity);
     //   setAllProducts([...allProducts, productQtf]);
+    // }
+    // const session = sessionStorage.setItem(
+    //   "products",
+    //   JSON.stringify(allProducts)
+    // );
+    // const getSession = JSON.parse(sessionStorage.getItem("products"));
+    // console.log(getSession);
+
+    // if (allProducts.length != 0) {
+    //   setAllProducts(getSession);
     // }
   };
 

@@ -22,13 +22,16 @@ const MenuProducts = ({
     }
   };
 
+
+
   const suma = (product) => {
     const products = allProducts.map((item) =>
       item.id === product.id ? { ...item, quantity: item.quantity + 1, } : item
     );
    setCountProducts(countProducts + 1);
-    
+  
     return setAllProducts(products);
+    
   };
   const resta = (product) => {
     if (product.quantity == 1) {
@@ -42,6 +45,7 @@ const MenuProducts = ({
 
       return setAllProducts(products);
     }
+    
   };
   return (
     <div className="row-product">
@@ -50,7 +54,7 @@ const MenuProducts = ({
           <div className="info-cart-product">
             <p className="titulo-producto-carrito">{product.title}</p>
             <span className="precio-producto-carrito">
-              ${product.price * product.quantity}
+              ${(product.price * product.quantity).toFixed(2)}
             </span>
           </div>
           <div className="number-input">

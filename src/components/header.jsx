@@ -28,7 +28,7 @@ const Header = ({
 
   const total2 = ()=>{
     const total = allProducts.reduce((acc, item) => acc + item.price *  item.quantity, 0);
-    return total;
+    return (total).toFixed(2);
  }
 
   
