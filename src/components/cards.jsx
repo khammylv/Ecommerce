@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from "react";
 import {
   mostrarProducts,
-  mostrarProductsUnico,
+  
 } from "../services/dataproducts";
 import "../App.css";
+import { productsApi, productUnico} from "../api/productsApi";
 
 const CardProducts = ({
   allProducts,
@@ -14,25 +15,28 @@ const CardProducts = ({
   setCountProducts,
 }) => {
   const [db, setdb] = useState([]);
-  const [productUn, setproductUn] = useState([]);
+
   useEffect(() => {
     const getdata = () => {
       mostrarProducts().then((res) => setdb(res));
     };
     getdata();
   }, []);
-
+ 
+  //setAllProducts(JSON.parse(sessionStorage.getItem('product')));
   const onAddProduct = (id) => {
-    mostrarProductsUnico(id).then((res) => {
-      setproductUn(res);
-      const productQtf = { ...productUn, quantity: 1 };
+    productUnico(id).then((res) => {
+      
+      const productQtf = { ...res, quantity: 1 };
       if (allProducts.find((item) => item.id === id)) {
         alert("este producto ya existe");
       } else {
         setCountProducts(countProducts + productQtf.quantity);
         setAllProducts([...allProducts, productQtf]);
+       
       }
-    });
+    })
+	.catch(err => console.log(err));
     // const productQtf = { ...product, quantity: 1 };
     // if (allProducts.find((item) => item.id === product.id)) {
     //   alert("este producto ya existe");

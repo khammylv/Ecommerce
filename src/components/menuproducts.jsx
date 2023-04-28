@@ -9,16 +9,16 @@ const MenuProducts = ({
   setCountProducts,
  
 }) => {
-  const deleteItem = (product) => {
+  const deleteItem = (id, num) => {
     if (allProducts.length == 1) {
       setAllProducts([]);
      
       setCountProducts(0);
     } else {
-      const results = allProducts.filter((item) => item.id !== product.id);
-      console.log(countProducts)
-      setCountProducts(countProducts - product.quantity);
+      const results = allProducts.filter((item) => item.id !== id);
+      setCountProducts(countProducts - num);
       setAllProducts(results);
+    
     }
   };
 
@@ -37,7 +37,7 @@ const MenuProducts = ({
       const products = allProducts.map((item) =>
         item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item
       );
-      console.log(products);
+     
       setCountProducts(countProducts - 1);
 
       return setAllProducts(products);
@@ -58,7 +58,7 @@ const MenuProducts = ({
             <p>{product.quantity}</p>
             <button onClick={() => suma(product)}>+</button>
           </div>
-          <button className="icon-close" onClick={() => deleteItem(product)}>
+          <button className="icon-close"  onClick={() => deleteItem(product.id,product.quantity )}>
             el
           </button>
         </div>
