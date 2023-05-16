@@ -3,7 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { mostrarProducts } from "../services/dataproducts";
 import "../App.css";
-import { productsApi, productUnico } from "../api/productsApi";
+import {  productUnico } from "../api/productsApi";
+import NiceModal from "@ebay/nice-modal-react";
+import ModalProducto from "./modal"
 
 const CardProducts = ({
   allProducts,
@@ -19,7 +21,7 @@ const CardProducts = ({
     };
     getdata();
   }, []);
-
+  
   const onAddProduct = (id) => {
     productUnico(id)
       .then((res) => {
@@ -51,6 +53,11 @@ const CardProducts = ({
     // }
   };
 
+  const showModalProducts = ()=>{
+	const saludo = 'hola a todos';
+    NiceModal.show(ModalProducto, {saludo}).then(()=>{});
+  }
+
   return (
     <div className="container-items">
       {db.map((product) => (
@@ -61,6 +68,7 @@ const CardProducts = ({
           <div className="info-product">
             <h2>{product.title}</h2>
             <p className="price">${product.price}</p>
+			<button onClick={showModalProducts()}>ver mas</button>
             <button onClick={() => onAddProduct(product.id)}>
               Añadir al carrito
             </button>

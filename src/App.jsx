@@ -6,17 +6,23 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/login.jsx";
 import Productos from "./pages/productos.jsx";
 import Protected from "./services/protected.jsx";
-
+import NiceModal from "@ebay/nice-modal-react";
 function App() {
   return (
     <main>
+      <NiceModal.Provider>
       <Routes>
-        
+      
         <Route path="/" element={<Login />} errorElement={<h1>Error!</h1>} />
+        
         <Route path="/productos" element={<Protected />}>
+        
           <Route index element={<Productos />} />
+          
         </Route>
+        
       </Routes>
+      </NiceModal.Provider>
       <ToastContainer
         position="top-center"
         autoClose={2500}
